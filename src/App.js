@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react'
 import {Route , Switch, useHistory} from 'react-router-dom';
 import Header from './components/Header';
 import { routes } from './routes'
 import { isAuthenticated } from './utils'
 
-const renderRoute = (route) => {
+const RenderRoute = (route) => {
   document.title = route.title;
   const history = useHistory({});
   if (route.needAuth && !isAuthenticated()){
@@ -46,9 +46,9 @@ class App extends React.Component {
       <div>
         <Switch>
           <Header currentUser={this.state.currentUser} logout={this.handleLogout} />
-          {routes.map((route, index) => {
+          {routes.map((route, index) => (
             <RenderRoute key={index} {...route} />
-          })}
+          ))}
         </Switch>
       </div>
 
@@ -60,4 +60,4 @@ class App extends React.Component {
 export default App;
 
 
-export default App;
+

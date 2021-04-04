@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
+import actionCable from 'actioncable';
 
 export const APP_CABLE_URL=""
 
+const cable = actionCable.createConsumer(APP_CABLE_URL)
 ReactDOM.render(
   <React.StrictMode>
     <Router>
