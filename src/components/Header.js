@@ -5,9 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-
-
-import {  useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,6 +27,11 @@ const Header = (props) => {
         history.push('/auth/login');
     }
 
+    const handleRegister = () => {
+        history.push('/auth/register');
+    }
+
+
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -37,7 +40,7 @@ const Header = (props) => {
                     
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        Chat App
+                        <Button color="inherit" onClick={() => history.push('/')}>Chat App</Button>
                     </Typography>
                     {props.currentUser &&
                         <Button color="inherit">Create Group</Button>
@@ -48,7 +51,7 @@ const Header = (props) => {
                     }
 
                     {!props.currentUser &&
-                        <Button color="inherit">Register</Button>
+                        <Button color="inherit" onClick={handleRegister}>Register</Button>
                     }
 
                     {props.currentUser &&

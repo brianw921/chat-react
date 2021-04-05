@@ -2,19 +2,21 @@ import React from 'react';
 
 
 import TextField from '@material-ui/core/TextField';
-import {Button} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 
 
-class Login extends React.Component {
+class Register extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
             username: '',
             password: '',
+            password_confirmation: ''
         }
     }
+
     handleSubmit = () => {
         return null
     }
@@ -26,10 +28,10 @@ class Login extends React.Component {
     }
 
     render() {
-        
+
         return (
             <div className="form-items">
-                <h1>Login</h1>
+                <h1>Register</h1>
                 <form noValidate autoComplete="off" onSubmit={this.handleSubmit} >
                     <h3>UserName</h3>
                     <TextField
@@ -48,14 +50,23 @@ class Login extends React.Component {
                         value={this.state.password}
                         onChange={(e) => this.handleChange(e)}
                     /><br /><br />
+                    <h3>Confirm Password</h3>
+                    <TextField
+                        label="Confirm Password"
+                        variant="outlined"
+                        type="password"
+                        name="password_confirmation"
+                        value={this.state.password_confirmation}
+                        onChange={(e) => this.handleChange(e)}
+                    /><br /><br />
                     <Button variant="contained" color="primary" type="Submit">
                         Submit
                     </Button>
                 </form>
             </div>
-
         );
     }
 }
 
-export default Login;
+export default Register
+
