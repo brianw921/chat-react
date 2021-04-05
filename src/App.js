@@ -4,6 +4,7 @@ import { Redirect, Route , Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './components/Login';
 import Register from './components/Register';
+import {isAuthenticated} from './utils';
 
 class App extends React.Component {
 
@@ -42,10 +43,13 @@ class App extends React.Component {
       <div>
         <Header currentUser={this.state.currentUser} logout={this.handleLogout} />
         <Switch>
-          <Route exact path='/auth/login' render={() => {
-            return this.state.currentUser? <Redirect to='/' /> : <Login updateCurrentUser={this.updateCurrentUser} />
+          <Route exact path='/auth/login' render={(props) => {
+            return this.state.currentUser && isAuthenticated ? <Redirect to='/' /> : <Login {...props} updateCurrentUser={this.updateCurrentUser} />
           }}/>
-          <Route path="/auth/register" component={Register}/>
+          <Route path='/auth/register' render={(props) => {
+            return this.state.currentUser && isAuthenticated ? <Redirect to='/' /> : <Register {...props} updateCurrentUser={this.updateCurrentUser} />
+          }} />
+
         </Switch>
       </div>
 
