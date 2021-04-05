@@ -20,12 +20,19 @@ class App extends React.Component {
     }
   }
 
+  updateCurrentUser = (data) => {
+    this.setState({
+      ...this.state,
+      currentUser: data
+    })
+  }
+
   handleLogout = () => {
     localStorage.removeItem('jwt_token')
     this.setState({
       currentUser: null
     })
-    return <Redirect to='/home' />
+    return <Redirect to='/' />
 
   }
 
@@ -35,7 +42,9 @@ class App extends React.Component {
       <div>
         <Header currentUser={this.state.currentUser} logout={this.handleLogout} />
         <Switch>
-          <Route path='/auth/login' component={Login}/>
+          <Route exact path='/auth/login' render={() => {
+            return this.state.currentUser? <Redirect to='/' /> : <Login updateCurrentUser={this.updateCurrentUser} />
+          }}/>
           <Route path="/auth/register" component={Register}/>
         </Switch>
       </div>

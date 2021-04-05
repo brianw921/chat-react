@@ -15,8 +15,28 @@ class Login extends React.Component {
             password: '',
         }
     }
-    handleSubmit = () => {
-        return null
+    handleSubmit = (e) => {
+        e.preventDefault()
+        fetch(`http://localhost:3000/api/v1/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({user: {
+                username: this.state.username,
+                password: this.state.password
+            }})
+        })
+        .then(res => res.json())
+        .then( data => {
+            if (data.authenticated){
+                localStorage.setItem('jwt_token', data.token)
+                this.props.updateCurrentUser(data.user)
+            } else {
+                alert('Pass/Username notfound')
+            }
+        })
     }
 
     handleChange = (e) => {
@@ -30,7 +50,7 @@ class Login extends React.Component {
         return (
             <div className="form-items">
                 <h1>Login</h1>
-                <form noValidate autoComplete="off" onSubmit={this.handleSubmit} >
+                <form noValidate autoComplete="off" onSubmit={(e) => this.handleSubmit(e)} >
                     <h3>UserName</h3>
                     <TextField
                         label="UserName"
