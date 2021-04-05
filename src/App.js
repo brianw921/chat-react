@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import {isAuthenticated} from './utils';
 
+
 class App extends React.Component {
 
   constructor(props) {
@@ -14,13 +15,14 @@ class App extends React.Component {
       currentUser: null,
       allRooms: [],
       currentRoom: {
-        room: {},
+        chatroom: [],
         users: [],
         messages: []
       }
     }
   }
 
+ 
   updateCurrentUser = (data) => {
     this.setState({
       ...this.state,
